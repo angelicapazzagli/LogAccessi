@@ -37,4 +37,9 @@ public class TentativoAccesso {
     public boolean getEsito() {
         return esito;
     }
+    
+    @Override
+    public String toString() {
+        return "TimeStamp: [" + timeStamp + "] Username: [" + username + "] IP: " + ip + "] Esito: [" + esito + "]\n";
+    }
 }

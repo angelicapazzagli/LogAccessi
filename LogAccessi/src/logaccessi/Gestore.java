@@ -7,6 +7,7 @@ package logaccessi;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Gestore {
     private String file;
-    private ArrayList<TentativoAccesso> elencoAccessi;
+    protected ArrayList<TentativoAccesso> elencoAccessi;
     
     public Gestore(String csv) throws IOException {
         this.file = csv;
@@ -25,9 +26,8 @@ public class Gestore {
         this.elencoAccessi = FileManager.readFile(file);
     }
     
-    public void stampaElenco() {
-        for(int i = 0; i < elencoAccessi.size(); i++) {
-            TentativoAccesso t = elencoAccessi.get(i);
+    public void stampaElenco(ArrayList<TentativoAccesso> elenco) {
+        for(TentativoAccesso t : elenco) {
             System.out.println("[" + t.getTimeStamp() + "] [" + t.getUsername() + "] [" + t.getIp() + "] [" + t.getEsito() + "]");
         }
     }
@@ -92,9 +92,9 @@ public class Gestore {
         return accessiIP;
     }
     
-    public ArrayList<TentativoAccesso> ordinamentoAccessi() {
-        ArrayList<TentativoAccesso> ordinamento = new ArrayList();
-        TentativoAccesso ultimo = null;
-        return ordinamento;
+    public void ordinamentoAccessi() {
+        ArrayList<TentativoAccesso> ordinamento = elencoAccessi;
+        ordinamento.sort(Comparator.comparing(TentativoAccesso::getTimeStamp));
+        this.stampaElenco(ordinamento);
     }
 }

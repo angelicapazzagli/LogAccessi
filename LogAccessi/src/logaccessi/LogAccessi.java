@@ -22,7 +22,7 @@ public class LogAccessi {
         Gestore g = new Gestore("LogAccessi.csv");
         g.readFile();
         
-        g.stampaElenco();
+        g.stampaElenco(g.elencoAccessi);
         
         g.checkFail();
         
@@ -38,6 +38,8 @@ public class LogAccessi {
         LocalDateTime fineP = LocalDateTime.parse(fine, formatter);
         scanner.close();
         System.out.println(g.controlloAccessi(inizioP, fineP));
+        
+        g.ordinamentoAccessi();
     }
     
 }
