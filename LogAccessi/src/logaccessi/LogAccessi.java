@@ -27,10 +27,13 @@ public class LogAccessi {
         g.readFile();
         
         g.stampaElenco(g.elencoAccessi);
+        System.out.println("\n");
         
         g.checkFail();
+        System.out.println("\n");
         
         System.out.println(g.segnalazioneIP());
+        System.out.println("\n");
         
         Scanner scanner = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -42,6 +45,7 @@ public class LogAccessi {
         LocalDateTime fineP = LocalDateTime.parse(fine, formatter);
         scanner.close();
         System.out.println(g.controlloAccessi(inizioP, fineP));
+        System.out.println("\n");
         
         g.ordinamentoAccessi();
     }
