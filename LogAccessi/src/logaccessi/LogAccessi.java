@@ -16,7 +16,11 @@ import java.util.Scanner;
 public class LogAccessi {
 
     /**
+     * Metodo principale per avviare il programma.
+     * 
      * @param args the command line arguments
+     * @throws IOException se si verifica un errore di lettura
+     * @see Gestore
      */
     public static void main(String[] args) throws IOException {
         Gestore g = new Gestore("LogAccessi.csv");

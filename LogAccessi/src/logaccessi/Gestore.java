@@ -13,24 +13,53 @@ import java.util.Comparator;
  *
  * @author 39333
  */
+/**
+ * Questa classe rapresenta un gestore di tutti i dati che contiene un file una volta trasferiti in una struttura dati.
+ * @author pazzagli.angelica
+ */
 public class Gestore {
     private String file;
     protected ArrayList<TentativoAccesso> elencoAccessi;
     
+    /**
+     * Costruisce un nuovo gestore.
+     * 
+     * @param csv file csv da gestire
+     * @throws IOException se si verifica un errore nella lettura
+     */
     public Gestore(String csv) throws IOException {
         this.file = csv;
         elencoAccessi = new ArrayList();
     }
     
+    /**
+     * Legge il file.
+     * 
+     * @throws IOException se si verifica un errore nella lettura
+     * @see FileManager
+     */
+    
     public void readFile() throws IOException {
         this.elencoAccessi = FileManager.readFile(file);
     }
+    
+    /**
+     * Stampa l'elenco dei dati a disposizione.
+     * 
+     * @param elenco l'elenco da stampare
+     */
     
     public void stampaElenco(ArrayList<TentativoAccesso> elenco) {
         for(TentativoAccesso t : elenco) {
             System.out.println("[" + t.getTimeStamp() + "] [" + t.getUsername() + "] [" + t.getIp() + "] [" + t.getEsito() + "]");
         }
     }
+    
+    /**
+     * Conta il numero di fail di ogni tentativo d'accesso con un username.
+     * 
+     * @see Counter
+     */
     
     public void checkFail() {
         ArrayList<Counter> fail = new ArrayList();
@@ -57,6 +86,12 @@ public class Gestore {
         }
     }
     
+    /**
+     * Controlla gli indirizzi IP sospetti.
+     * 
+     * @return una lista di stringhe con gli IP sospetti
+     */
+    
     public ArrayList<String> segnalazioneIP() {
         ArrayList<String> IPsegnalati = new ArrayList();
         String ultimoIP = null;
@@ -80,6 +115,14 @@ public class Gestore {
         return IPsegnalati;
     }
     
+    /**
+     * Controlla gli accessi effettuati in un intervallo di tempo.
+     * 
+     * @param inizio l'inizio dell'intervallo di tempo
+     * @param fine la fine dell'intervallo di tempo
+     * @return una lista di stringhe con gli accessi che rientrano nell'intervallo
+     */
+    
     public ArrayList<String> controlloAccessi(LocalDateTime inizio, LocalDateTime fine) {
         ArrayList<String> accessiIP = new ArrayList();
         for(TentativoAccesso t : elencoAccessi) {
@@ -91,6 +134,10 @@ public class Gestore {
         }
         return accessiIP;
     }
+    
+    /**
+     * Mette in ordine temporale i tentativi d'accesso.
+     */
     
     public void ordinamentoAccessi() {
         ArrayList<TentativoAccesso> ordinamento = elencoAccessi;

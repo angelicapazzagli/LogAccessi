@@ -16,7 +16,19 @@ import java.util.ArrayList;
  *
  * @author 39333
  */
+/**
+ * Rappresenta il file da leggere.
+ * @author pazzagli.angelica
+ */
 public class FileManager {
+    /**
+     * Legge un file specificato.
+     * 
+     * @param file il file da leggere
+     * @return il file sotto forma di lista di oggetti
+     * @throws FileNotFoundException se il file non viene trovato
+     * @throws IOException se si verifica un errore di lettura
+     */
     public static ArrayList<TentativoAccesso> readFile(String file) throws FileNotFoundException, IOException {
         ArrayList<TentativoAccesso> elencoAccessi = new ArrayList();
         try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
